@@ -4,6 +4,11 @@ import javax.inject._
 import play.api._
 import play.api.mvc._
 
+import views._
+
+import controller.AConsoleTest
+import controller.Controller
+import aview.Tui
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -19,18 +24,27 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-  // val c = new _root_.controller.Controller
-  // val tui = new aview.Tui(c)
 
+  var cont = Controller.apply()
+  val tui = new Tui(cont)
 
-  def index() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
-  }
+  val testAccess = AConsoleTest("Sarah")
+
 
   def test() = Action{ implicit request: Request[AnyContent] =>
-    Ok("Hello World!")}
+      Ok(testAccess.greetings)
+  }
     
+  def testWithVariable(name: String = "World") = Action{ implicit request: Request[AnyContent] =>
+    Ok(testAccess.sayHello(name))}
 
-  def game() = Action{ implicit request: Request[AnyContent] =>
-    Ok("Welcome to Game")}
+  def startGame() = Action{ implicit request: Request[AnyContent] => 
+    Ok(s"Welcome to Shutthebox!\n \nHow to play:\nwrite Localhost9000/gameX, where X is the move you want to do.\nexample: .../gamew to roll the dice\n\n$cont")
+  }
+
+  def doAMove(input:String) = Action{ implicit request: Request[AnyContent] =>
+    tui.getInputAndPrintLoop(input)
+    Ok(cont.toString())
+  }
+
 }

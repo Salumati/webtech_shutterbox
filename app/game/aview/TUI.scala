@@ -9,7 +9,7 @@ class Tui(controller: ControllerInterface) extends Observer {
 
   getInputAndPrintLoop("start")
 
-  override def update = println(controller.toString)
+  override def update = controller.toString
 
   def getInputAndPrintLoop(in: String): Unit = {
     val input = in
@@ -26,11 +26,6 @@ class Tui(controller: ControllerInterface) extends Observer {
       case "q" => System.exit(0)
       case default =>
         print("Unbekannte Eingabe!\n")}
-  }
-    
-
-  def sayHello(): String ={
-    "Hello World! Welcome to Shut the Box!"
   }
 
 }
