@@ -6,7 +6,6 @@ import play.api.mvc._
 
 import views._
 
-import controller.AConsoleTest
 import controller.Controller
 import aview.Tui
 
@@ -28,20 +27,15 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   var cont = Controller.apply()
   val tui = new Tui(cont)
 
-  val testAccess = AConsoleTest("Sarah")
 
+  def index() = Action{ implicit request: Request[AnyContent] =>
+    Ok(views.html.index())
 
-  def test() = Action{ implicit request: Request[AnyContent] =>
-      Ok(testAccess.greetings)
   }
-    
-  def testWithVariable(name: String = "World") = Action{ implicit request: Request[AnyContent] =>
-    Ok(testAccess.sayHello(name))}
 
   def startGame() = Action{ implicit request: Request[AnyContent] => 
     Ok(s"Welcome to Shutthebox!\n \nHow to play:\nwrite Localhost9000/gameX, where X is the move you want to do.\nexample: .../gamew to roll the dice\n\n$cont")
   }
-
   def doAMove(input:String) = Action{ implicit request: Request[AnyContent] =>
     tui.getInputAndPrintLoop(input)
     Ok(cont.toString())
