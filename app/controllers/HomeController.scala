@@ -33,6 +33,10 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   }
 
+  def explain() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.explain())
+  }
+
   def startGame() = Action{ implicit request: Request[AnyContent] => 
     Ok(s"Welcome to Shutthebox!\n \nHow to play:\nwrite Localhost9000/gameX, where X is the move you want to do.\nexample: .../gamew to roll the dice\n\n$cont")
   }

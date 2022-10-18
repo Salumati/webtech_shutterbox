@@ -11,3 +11,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET     /game                       controllers.HomeController.startGame()
 GET     /game/:input                 controllers.HomeController.doAMove(input)
+
+GET     /explain                    controllers.HomeController.explain()
+
