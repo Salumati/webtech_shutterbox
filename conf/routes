@@ -14,3 +14,5 @@ GET     /test:name                  controllers.HomeController.testWithVariable(
 
 GET     /game                       controllers.HomeController.startGame()
 GET     /game:input                 controllers.HomeController.doAMove(input)
+
+GET     /explain                    controllers.HomeController.explain()

@@ -34,6 +34,9 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   def test() = Action{ implicit request: Request[AnyContent] =>
       Ok(testAccess.greetings)
   }
+  def explain() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.explain())
+  }
     
   def testWithVariable(name: String = "World") = Action{ implicit request: Request[AnyContent] =>
     Ok(testAccess.sayHello(name))}
