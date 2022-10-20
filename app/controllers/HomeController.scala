@@ -45,4 +45,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok(cont.toString())
   }
 
+  def getGameHtml() = Action{ implicit request: Request[AnyContent] =>
+    Ok(views.html.game())
+  }
+
 }
