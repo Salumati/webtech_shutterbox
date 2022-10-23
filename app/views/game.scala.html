@@ -1,0 +1,36 @@
+@(player: String, dice: String, sum: Int, board: List[Boolean])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How to play</title>
+</head>
+<body bgcolor="gray">
+<div style="text-align: center">
+  <p>@player</p>
+  <p>
+    @for(index <- 0 until board.size){
+      @if(board(index)){
+        #
+      }
+      @if(!board(index)){
+        @{index + 1}
+      }
+    }
+  </p>
+  <p>
+    @for(index <- 0 until board.size){
+      @if(board(index)){
+        @{index + 1}
+      }
+      @if(!board(index)){
+        #
+      }
+    }
+  </p>
+  <p>Gewürfelt: @dice | Summe: @sum</p>
+  <img src="@routes.Assets.versioned("images/shutthebox.png")">
+  </p>
+</div>
+</body>
+</html>

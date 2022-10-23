@@ -26,23 +26,26 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   var cont = Controller.apply()
   val tui = new Tui(cont)
-
+  var isShut: List[Boolean] = List(false, false, false, false, false, false, false, false, false)
+  def update() = {
+    for ( x <- 1 to 9){
+      isShut = isShut.updated(x - 1, cont.isShut(x))
+    }
+  }
 
   def index() = Action{ implicit request: Request[AnyContent] =>
     Ok(views.html.index())
-
   }
-
   def explain() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.explain())
   }
-
-  def startGame() = Action{ implicit request: Request[AnyContent] => 
-    Ok(s"Welcome to Shutthebox!\n \nHow to play:\nwrite Localhost9000/gameX, where X is the move you want to do.\nexample: .../gamew to roll the dice\n\n$cont")
+  def startGame() = Action{ implicit request: Request[AnyContent] =>
+    update()
+    Ok(views.html.game(player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
   def doAMove(input:String) = Action{ implicit request: Request[AnyContent] =>
     tui.getInputAndPrintLoop(input)
-    Ok(cont.toString())
+    update()
+    Ok(views.html.game(player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
-
 }
