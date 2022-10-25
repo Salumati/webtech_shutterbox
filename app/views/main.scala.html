@@ -13,9 +13,19 @@
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <!--
+            TODO: 
+            * change Tab image from favicon to something more fitting for the game
+            * add table for changeing css styles:
+                    - include Darkmode
+                    - include Feltmode (green, felt like background, immitating the actual game board)
+                    - include something from CSS Zen Garden? (we would have to adapt the class names in order to do that)
+
+
+        -->
 
     </head>
-    <body bgcolor="white" >
+    <body class="body" >
         @* And here's where we render the `Html` object containing
          * the page content. *@
         @content 
