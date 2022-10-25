@@ -1,0 +1,82 @@
+@(player: String, dice: String, sum: Int, board: List[Boolean])
+@main("Game"){
+<div style="text-align: center">
+  <p>@player</p>
+  <p>
+    @for(index <- 0 until board.size){
+      @if(board(index)){
+        #
+      }
+      @if(!board(index)){
+        @{index + 1}
+      }
+    }
+  </p>
+  <p>
+    @for(index <- 0 until board.size){
+      @if(board(index)){
+        @{index + 1}
+      }
+      @if(!board(index)){
+        #
+      }
+    }
+  </p>
+  <p>Gewürfelt: @dice | Summe: @sum</p>
+  <center>
+  <p>
+    <table>
+      <tr>
+        <td>
+          <a href="http://localhost:9000/game/1"> 1 </a> 
+        </td>
+        <td>
+          <a href="http://localhost:9000/game/2"> 2 </a> 
+        </td>
+        <td>
+          <a href="http://localhost:9000/game/3"> 3 </a> 
+        </td>
+        <td>
+          <a href="http://localhost:9000/game/4"> 4 </a> 
+        </td>
+        <td>
+          <a href="http://localhost:9000/game/5"> 5 </a> 
+        </td>
+        <td>
+          <a href="http://localhost:9000/game/6"> 6 </a> 
+        </td>
+        <td>
+          <a href="http://localhost:9000/game/7"> 7 </a> 
+        </td>
+        <td>
+          <a href="http://localhost:9000/game/8"> 8 </a> 
+        </td> 
+        <td>
+          <a href="http://localhost:9000/game/9"> 9 </a> 
+        </td>       
+      </tr>
+    </table>
+
+  </p>
+</center>
+
+  <p>
+     <a href="http://localhost:9000/game/w">Würfeln </a> 
+  </p>
+  <p>
+    <a href="http://localhost:9000/game/y">Undo</a>
+  </p>
+  <p>
+    <a href="http://localhost:9000/game/z">Redo</a>
+  </p>
+  <p>
+    <a href="http://localhost:9000/game/next">next Player</a>
+  </p>
+  <p>
+    <form></form>
+  </p>
+  <img src="@routes.Assets.versioned("images/shutthebox.png")">
+  
+  </p>
+</div>
+}
