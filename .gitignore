@@ -21,7 +21,6 @@ project/project/
 project/target/
 project/metals.sbt
 
-public/
 
 .bsp/
 .metals/

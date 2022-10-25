@@ -4,6 +4,10 @@ import javax.inject._
 import play.api._
 import play.api.mvc._
 
+import views._
+
+import controller.Controller
+import aview.Tui
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -19,18 +23,30 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-  // val c = new _root_.controller.Controller
-  // val tui = new aview.Tui(c)
 
-
-  def index() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+  var cont = Controller.apply()
+  val tui = new Tui(cont)
+  var isShut: List[Boolean] = List(false, false, false, false, false, false, false, false, false)
+  def update() = {
+    for ( x <- 1 to 9){
+      isShut = isShut.updated(x - 1, cont.isShut(x))
+    }
   }
 
-  def test() = Action{ implicit request: Request[AnyContent] =>
-    Ok("Hello World!")}
-    
+  def index() = Action{ implicit request: Request[AnyContent] =>
+    Ok(views.html.index())
+  }
+  def explain() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.explain())
+  }
+  def startGame() = Action{ implicit request: Request[AnyContent] =>
+    update()
+    Ok(views.html.game(player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
+  }
+  def doAMove(input:String) = Action{ implicit request: Request[AnyContent] =>
+    tui.getInputAndPrintLoop(input)
+    update()
+    Ok(views.html.game(player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
+  }
 
-  def game() = Action{ implicit request: Request[AnyContent] =>
-    Ok("Welcome to Game")}
 }

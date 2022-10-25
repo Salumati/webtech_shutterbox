@@ -4,10 +4,13 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index()
+GET     /                               controllers.HomeController.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                   controllers.Assets.versioned(path="/public", file: Asset)
 
-GET     /test                       controllers.HomeController.test()
-GET     /game                       controllers.HomeController.game()
+GET     /game                       controllers.HomeController.startGame()
+GET     /game/:input                controllers.HomeController.doAMove(input)
+
+GET     /explain                        controllers.HomeController.explain()
+
