@@ -41,12 +41,12 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   }
   def startGame() = Action{ implicit request: Request[AnyContent] =>
     update()
-    Ok(views.html.game(player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
+    Ok(views.html.game(style="body-light", player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
   def doAMove(input:String) = Action{ implicit request: Request[AnyContent] =>
     tui.getInputAndPrintLoop(input)
     update()
-    Ok(views.html.game(player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
+    Ok(views.html.game(style="body-light", player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
 
 }
