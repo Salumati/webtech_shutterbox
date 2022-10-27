@@ -11,6 +11,7 @@ scalacOptions += "Ytasty-reader"
 libraryDependencies += guice
 
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
+includeFilter in (Assets, LessKeys.less) := "darkmode.less" | "main.less"
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "htwg.shutthebox.com.controllers._"
