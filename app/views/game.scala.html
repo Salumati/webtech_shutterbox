@@ -1,82 +1,94 @@
 @(style: String, player: String, dice: String, sum: Int, board: List[Boolean])
 @main("Game", s"$style"){
-<div style="text-align: center">
-  <p>@player</p>
-  <p>
-    @for(index <- 0 until board.size){
+<div class="game" style="text-align: center">
+  <div class="player">
+    <p>@player</p>
+  </div>
+  <div class="clap">
+    <p>
+      @for(index <- 0 until board.size){
       @if(board(index)){
-        #
+      #
       }
       @if(!board(index)){
-        @{index + 1}
+      @{index + 1}
       }
-    }
-  </p>
-  <p>
-    @for(index <- 0 until board.size){
+      }
+    </p>
+    <p>
+      @for(index <- 0 until board.size){
       @if(board(index)){
-        @{index + 1}
+      @{index + 1}
       }
       @if(!board(index)){
-        #
+      #
       }
-    }
-  </p>
-  <p>Gewürfelt: @dice | Summe: @sum</p>
-  <center>
-  <p>
-    <table>
-      <tr>
-        <td>
-          <a href="http://localhost:9000/game/1"> 1 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/2"> 2 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/3"> 3 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/4"> 4 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/5"> 5 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/6"> 6 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/7"> 7 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/8"> 8 </a> 
-        </td> 
-        <td>
-          <a href="http://localhost:9000/game/9"> 9 </a> 
-        </td>       
-      </tr>
-    </table>
+      }
+    </p>
+  </div>
+  <div class="dice">
+    <p>Gewürfelt: @dice | Summe: @sum</p>
+  </div>
+  <div class="button_dice">
+    <p>
+      <a href="http://localhost:9000/game/w">Würfeln </a>
+    </p>
+  </div>
+  <div class="button_undo">
+    <p>
+      <a href="http://localhost:9000/game/y">Undo </a>
+    </p>
+  </div>
+  <div class="button_redo">
+    <p>
+      <a href="http://localhost:9000/game/z">Redo </a>
+    </p>
+  </div>
+  <div class="button_nextPlayer">
+    <p>
+      <a href="http://localhost:9000/game/next">next Player</a>
+    </p>
+  </div>
 
-  </p>
-</center>
 
-  <p>
-     <a href="http://localhost:9000/game/w">Würfeln </a> 
-  </p>
-  <p>
-    <a href="http://localhost:9000/game/y">Undo</a>
-  </p>
-  <p>
-    <a href="http://localhost:9000/game/z">Redo</a>
-  </p>
-  <p>
-    <a href="http://localhost:9000/game/next">next Player</a>
-  </p>
-  <p>
-    <form></form>
-  </p>
-  <img src="@routes.Assets.versioned("images/shutthebox.png")" width="auto" height="300>
-  
-  </p>
+
+
+<!--  <center>-->
+<!--  <p>-->
+<!--    <table>-->
+<!--      <tr>-->
+<!--        <td>-->
+<!--          <a href="http://localhost:9000/game/1"> 1 </a> -->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <a href="http://localhost:9000/game/2"> 2 </a> -->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <a href="http://localhost:9000/game/3"> 3 </a> -->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <a href="http://localhost:9000/game/4"> 4 </a> -->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <a href="http://localhost:9000/game/5"> 5 </a> -->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <a href="http://localhost:9000/game/6"> 6 </a> -->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <a href="http://localhost:9000/game/7"> 7 </a> -->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <a href="http://localhost:9000/game/8"> 8 </a> -->
+<!--        </td> -->
+<!--        <td>-->
+<!--          <a href="http://localhost:9000/game/9"> 9 </a> -->
+<!--        </td>       -->
+<!--      </tr>-->
+<!--    </table>-->
+
+<!--  </p>-->
+<!--</center>-->
+<!--  <img src="@routes.Assets.versioned("images/shutthebox.png")" width="auto" height="300>-->
 </div>
 }

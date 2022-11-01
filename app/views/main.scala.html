@@ -25,20 +25,21 @@
         -->
 
     </head>
-    <body class="@style >
-        @* And here's where we render the `Html` object containing
-         * the page content. *@
-        @content 
-
-        
-        <div>
-            <hr size="1" width="100%" />
-            <table cellspacing="5" cellpadding="5">
-              <tr> <td>  <a href="http://localhost:9000"> Start </a> </td> 
-                   <td> <a href="http://localhost:9000/game"> Zum Spiel </a> </td>
-                   <td> <a href="http://localhost:9000/explain"> Erklärung</a> </td> </tr>
-            </table>
-          </div>
+    <body class="@style" >
+        <div class="header"></div>
+        <div class="menu"></div>
+        <div clas="content">
+            @content
+        </div>
+        <div class="footer">
+          <table cellspacing="5" cellpadding="5">
+            <tr>
+                <td><a href="http://localhost:9000"> Start</a></td>
+                <td><a href="http://localhost:9000/game"> Zum Spiel </a></td>
+                <td><a href="http://localhost:9000/explain"> Erklärung</a></td>
+            </tr>
+          </table>
+        </div>
         
       <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
     </body>

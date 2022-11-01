@@ -33,8 +33,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     }
   }
 
-  def index() = Action{ implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+  def start() = Action{ implicit request: Request[AnyContent] =>
+    Ok(views.html.start())
   }
   def explain() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.explain())
