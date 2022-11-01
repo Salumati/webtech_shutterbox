@@ -1,5 +1,5 @@
-
-@main("Rules", "body-dark"){
+@(style: String)
+@main("Rules", s"$style"){
 <div style="text-align: center" class="explain">
     <p>Welcome to Shutthebox!</p>
     <p>How to play:</p>
@@ -12,7 +12,5 @@
     <p>Undo: y</p>
     <p>example: .../game/w to roll the dice</p>
     <img src="@routes.Assets.versioned("images/shutthebox.png")" width="auto" height="300>
-
-    </p>
 </div>
 }

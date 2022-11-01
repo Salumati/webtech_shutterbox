@@ -32,21 +32,22 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
       isShut = isShut.updated(x - 1, cont.isShut(x))
     }
   }
+  var style = "default-body"
 
   def start() = Action{ implicit request: Request[AnyContent] =>
-    Ok(views.html.start())
+    Ok(views.html.start(style=style))
   }
   def explain() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.explain())
+    Ok(views.html.explain(style=style))
   }
   def startGame() = Action{ implicit request: Request[AnyContent] =>
     update()
-    Ok(views.html.game(style="body-light", player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
   def doAMove(input:String) = Action{ implicit request: Request[AnyContent] =>
     tui.getInputAndPrintLoop(input)
     update()
-    Ok(views.html.game(style="body-light", player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
 
 }
