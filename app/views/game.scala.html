@@ -5,16 +5,14 @@
     <p>@player</p>
   </div>
   <div class="clap">
-    <p>
-      @for(index <- 0 until board.size){
-      @if(board(index)){
-      <a href="http://localhost:9000/game/@{index + 1}" class="stone"> # </a>
-      }
-      @if(!board(index)){
-      <a href="http://localhost:9000/game/@{index + 1}" class="stone"> @{index + 1} </a>
-      }
-      }
-    </p>
+    @for(index <- 0 until board.size){
+    @if(board(index)){
+    <a href="http://localhost:9000/game/@{index + 1}" class="stone-shut"> # </a>
+    }
+    @if(!board(index)){
+    <a href="http://localhost:9000/game/@{index + 1}" class="stone-not-shut"> @{index + 1} </a>
+    }
+    }
     <p>
       @for(index <- 0 until board.size){
       @if(board(index)){
