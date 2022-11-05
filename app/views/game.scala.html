@@ -8,10 +8,10 @@
     <p>
       @for(index <- 0 until board.size){
       @if(board(index)){
-      #
+      <a href="http://localhost:9000/game/@{index + 1}" class="stone"> # </a>
       }
       @if(!board(index)){
-      @{index + 1}
+      <a href="http://localhost:9000/game/@{index + 1}" class="stone"> @{index + 1} </a>
       }
       }
     </p>
@@ -49,44 +49,6 @@
       <a href="http://localhost:9000/game/next">next Player</a>
     </p>
   </div>
-
-
-
-
-<!--  <center>-->
-<!--  <p>-->
-<!--    <table>-->
-<!--      <tr>-->
-<!--        <td>-->
-<!--          <a href="http://localhost:9000/game/1"> 1 </a> -->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <a href="http://localhost:9000/game/2"> 2 </a> -->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <a href="http://localhost:9000/game/3"> 3 </a> -->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <a href="http://localhost:9000/game/4"> 4 </a> -->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <a href="http://localhost:9000/game/5"> 5 </a> -->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <a href="http://localhost:9000/game/6"> 6 </a> -->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <a href="http://localhost:9000/game/7"> 7 </a> -->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <a href="http://localhost:9000/game/8"> 8 </a> -->
-<!--        </td> -->
-<!--        <td>-->
-<!--          <a href="http://localhost:9000/game/9"> 9 </a> -->
-<!--        </td>       -->
-<!--      </tr>-->
-<!--    </table>-->
-
 <!--  </p>-->
 <!--</center>-->
 <!--  <img src="@routes.Assets.versioned("images/shutthebox.png")" width="auto" height="300>-->
