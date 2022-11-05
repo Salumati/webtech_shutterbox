@@ -25,20 +25,26 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    */
 
   var cont = Controller.apply()
-  val tui = new Tui(cont)
+  var tui = new Tui(cont)
   var isShut: List[Boolean] = List(false, false, false, false, false, false, false, false, false)
   def update() = {
     for ( x <- 1 to 9){
       isShut = isShut.updated(x - 1, cont.isShut(x))
     }
   }
-  var style = "default-body"
+  var style = "body-classic"
 
   def start() = Action{ implicit request: Request[AnyContent] =>
     Ok(views.html.start(style=style))
   }
   def explain() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.explain(style=style))
+  }
+  def newGame() = Action{ implicit request: Request[AnyContent] =>
+    cont = Controller.apply()
+    tui = new Tui(cont)
+    update()
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
   def startGame() = Action{ implicit request: Request[AnyContent] =>
     update()
