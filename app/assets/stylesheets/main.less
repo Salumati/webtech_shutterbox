@@ -10,13 +10,110 @@
 }
 
 .body-dark{
+    background:
+                            radial-gradient(black 15%, transparent 16%) 0 0,
+                            radial-gradient(black 15%, transparent 16%) 8px 8px,
+                            radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+                            radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+                            background-color:#282828;
+                            background-size:16px 16px;
     margin-left: 10%;
     margin-right: 10%;
     color: cornflowerblue;
-    background-color: blanchedalmond;
+//     background-color: blanchedalmond;
     .header{}
     .menu{}
     .content{}
     .footer{}
 
+}
+
+.body-classic {
+    .content {
+        .game {
+            .player {
+                .button();
+                 border-style: dotted;
+                display: block;
+                width: auto;
+                font-size: larger;
+                margin-top: 20px;
+                margin-bottom: 50px;
+            }
+            .clap {
+                p {
+                    display: none;
+                }
+                a {
+                    font-size: larger;
+                }
+                .stone-not-shut {
+                     border-style: ridge;
+                     border-width: thick;
+                     border-color: #BA8C63;
+                     padding: 20px;
+                     margin-top: 20px;
+                     margin-bottom: 20px;
+                     background-image:url("http://localhost:9000/assets/images/retina_wood.png");
+                     background-repeat: repeat;
+                }
+                .stone-shut {
+                    .stone-not-shut();
+                    background-image:url("http://localhost:9000/assets/images/retina_wood_dark.png");
+                    background-repeat: repeat;
+                }
+            }
+            .dice {
+                .button();
+                 border-style: dotted;
+                display: block;
+                width: auto;
+                font-size: larger;
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
+            .button_dice {
+                .button();
+            }
+            .button_undo {
+                .button();
+            }
+            .button_redo {
+                .button();
+            }
+            .button_nextPlayer {
+                .button();
+            }
+        }
+    }
+    .footer {
+       display: flex;
+       align-items:center;
+       justify-content: center;
+       a {
+        .button();
+        width: auto;
+       }
+    }
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    .button {
+        display: inline-block;
+        text-align: center;
+        width: 100px;
+        border-style: ridge;
+        border-width: thick;
+        border-color: #BA8C63;
+        padding: 10px;
+        background-image:url("http://localhost:9000/assets/images/wood_button.png");
+        background-repeat: repeat;
+        margin-bottom: 40px;
+    }
+    font-size: large;
+    display: visible;
+    background-color: gray;
+    background-image:url("http://localhost:9000/assets/images/filz_green.png");
+    background-repeat: repeat;
 }
