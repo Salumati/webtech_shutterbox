@@ -56,4 +56,5 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
 
+
 }
