@@ -32,7 +32,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
       isShut = isShut.updated(x - 1, cont.isShut(x))
     }
   }
-  var style = "body-classic"
+  var style = "patchy"
 
   def start() = Action{ implicit request: Request[AnyContent] =>
     Ok(views.html.start(style=style))
@@ -55,5 +55,11 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     update()
     Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
+
+  def changeStyle(s:String) = Action{ implicit request: Request[AnyContent] =>
+    style = s
+    Ok(views.html.start(style=style))
+  }
+
 
 }
