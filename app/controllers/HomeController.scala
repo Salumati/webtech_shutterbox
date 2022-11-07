@@ -56,5 +56,10 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
 
+  def changeStyle(s:String) = Action{ implicit request: Request[AnyContent] =>
+    style = s
+    Ok(views.html.start(style=style))
+  }
+
 
 }
