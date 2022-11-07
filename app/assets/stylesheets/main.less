@@ -20,3 +20,186 @@
     .footer{}
 
 }
+
+
+.patchy{
+    /* background colors */
+    @base-bgcolor:blanchedalmond;
+    @dark-bgcolor:rgba(255, 235, 205, 0.5);
+    @light-bgcolor: hsl(36, 50%, 90%);
+
+    /* text colors */
+    @base-txtcolor: rgb(100, 149, 237); /*conrflowerblue*/
+    @link-txtcolor: rgb(150, 149, 237);
+    @visitedlink-txtcolor: rgb(170, 149, 250);
+    @dark-txtcolor: rgb(90, 100, 255);
+
+    @dark-pink: rgb(119, 11, 65);
+    @mid-pink: rgb(230, 170, 200);
+
+    @border-color: rgba(100, 149, 255, 0.5);
+
+
+    text-align: center;
+    color: @base-txtcolor;
+    background-color: @base-bgcolor;
+
+    h1{
+        color: @dark-txtcolor;
+        margin: 2%;
+        padding: 2%;
+    }
+
+
+    a:link {
+        color: @link-txtcolor;
+    }
+    a:visited{
+        color: @visitedlink-txtcolor;
+
+    }
+    a:hover{
+        background-color: @dark-bgcolor;
+        color: @border-color;
+
+    }
+
+
+    .header{
+        display: block;
+        position: fixed;
+        text-align: left;
+        background-color: @light-bgcolor;
+    }
+    .menu{
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: auto;
+        
+        padding-top: 2%;
+        padding-bottom: 2%;
+
+        margin-bottom: 2%;
+
+        background-color: rgb(164, 198, 250);
+
+        z-index: 1;
+
+        color: @dark-pink;
+
+        ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: @mid-pink;
+            border-color: @dark-pink;
+            border-style: dashed;
+        }
+        li{
+            display: inline;
+            padding: 1%;
+            padding-left: 2%;
+            padding-right: 2%;
+            margin: 2%;
+            border: 10%;
+            border-color: @border-color;
+            border-style: dashed;
+
+            background-color: pink;
+        }
+        a{
+            color: @dark-pink;
+        }
+        a:hover a:active{
+            color: pink;
+            background-color: @mid-pink;
+
+        }
+
+
+    }
+    .content{
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 10%;
+        margin-bottom: 10%;
+
+        position: relative;
+
+        h3{
+            color: @dark-txtcolor;
+            text-align: left;
+            margin-bottom: 2%;
+        }
+
+        dd{
+            display: block;
+
+            border: 15%;
+            border-color: @border-color;
+            border-style: dashed;
+           
+            margin: 2%;
+            margin-right: 30%;
+
+            max-width: 50%;
+
+            padding: 3%;
+        }
+
+        img{
+            position: relative;
+
+            margin-right: 10%;
+            float: right;
+
+        }
+
+        .game{
+
+        }
+        .player{
+            color: @dark-pink;
+        }
+        .clap{
+            a{
+                ackground-color: pink;
+                padding: 3%;
+                padding-top: 5%;
+                padding-bottom: 5%; 
+            }
+        }
+    
+    }
+    .footer{
+       bottom: 7%;
+        width: 50%;
+        position: relative;
+
+        text-align: center;
+
+        z-index: 1;
+
+        a{
+            text-align: center;
+            background-color: @light-bgcolor;
+
+            border: 0.4 cm;
+            border-color: @border-color;
+            border-style: dashed;
+            margin: 1%;
+            padding: 0.5%;
+            padding-left: 2%;
+            padding-right: 2%;
+        }
+        a:hover{
+            background-color: @dark-bgcolor;
+            color: @border-color;
+    
+        }
+
+        
+    }
+}
