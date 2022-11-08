@@ -239,9 +239,14 @@
                     background-color: rgb(230, 154, 55);
                     height: 50%;
                     width: 63%;
+                    margin: 8%;
                     margin-left: 10%;
+
+                    
+                    padding: 0%;
                     padding-top: 6%;
                     padding-bottom: 6%;
+
                 }
                 a{
                     position: relative;
@@ -321,36 +326,19 @@
     text-align: center;
     color: @base-txtcolor;
     background-color: @base-bgcolor;
-
-    .dropdown {
-        position: relative;
-        display: inline-block;
-        padding-top: 1%;
-        padding-bottom: 1%;
-        margin: 2%;
-      }
+    font-family: "Brush Script MT", cursive;
       
-      .dropdown-content {
-        display: none;
-        position: absolute;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        padding: 12px 16px;
-        z-index: 1;
-
-        li{
-            display: none;
-        }
-      }
-      
-      .dropdown:hover .dropdown-content {
-        display: block;
-      }
 
     h1{
         color: @dark-txtcolor;
+        font-size: 50px;
+        
         margin: 2%;
         padding: 2%;
+    }
+
+    h3{
+        font-size: 35px;
     }
 
 
@@ -387,6 +375,44 @@
         z-index: 1;
         color: @dark-pink;
 
+        border-bottom: dashed;
+        border-color: @dark-txtcolor;
+
+
+        .dropdown {
+            position: relative;
+            display: inline;
+            
+            li{
+                position: relative;
+                margin: 2%;
+                padding: 2%;
+        
+        }
+
+          }
+          
+          .dropdown-content {
+            display: none;
+            position: relative;
+            width: 20px;
+            z-index: 1;
+
+
+            li{
+                display: block;
+                width: 10%;
+                right: 30%;
+                left: 80%;
+                padding: 0%;
+                
+            }
+          }
+    
+        
+        .dropdown:hover .dropdown-content {
+            display: inline;
+            }
 
 
         ul{
@@ -410,6 +436,7 @@
         }
         a{
             color: @dark-pink;
+            text-decoration: none;
         }
         a:hover a:active{
             color: pink;
@@ -470,13 +497,14 @@
         }
     }
     .footer{
-       bottom: 7%;
+       bottom: 12%;
         width: 50%;
         position: relative;
 
         text-align: center;
 
         z-index: 1;
+        margin: 2%;
 
         a{
             text-align: center;
