@@ -32,7 +32,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
       isShut = isShut.updated(x - 1, cont.isShut(x))
     }
   }
-  var style = "classic"
+  var style = "felt"
 
   def start() = Action{ implicit request: Request[AnyContent] =>
     Ok(views.html.start(style=style))
