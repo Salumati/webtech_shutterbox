@@ -90,6 +90,70 @@
     background-image:url("http://localhost:9000/assets/images/filz_green.png");
     background-repeat: repeat;
 }
+.bootstrap {
+    margin: 20px;
+    margin-top: 10px;
+    .clap_button {
+            display: inline-block;
+            text-align: center;
+            width: 100px;
+            border-style: ridge;
+            border-width: thick;
+            border-color: #BA8C63;
+            padding: 10px;
+            background-image:url("http://localhost:9000/assets/images/wood_button.png");
+            background-repeat: repeat;
+        }
+    .menu {
+    background-color: red;
+    }
+    .content {
+    background-color: #17a2b8;
+    color: #17a2b8;
+        .game {
+            .game_display {
+                background-color: black;
+                .player {
+                    background-color: darkgreen;
+                            }
+                .clap {
+                    background-color: green;
+                                }
+                    .stone-not-shut {
+                        .clap_button();
+
+                                }
+                    .stone-shut {
+                        .clap_button();
+                                }
+
+                    .dice {
+                        background-color: lightgreen;
+
+                            }
+            }
+            .game_buttons {
+            background-color: gray;
+
+                .button_dice {
+
+                }
+                .button_undo {
+
+                }
+                .button_redo {
+
+                }
+                .button_nextPlayer {
+
+                }
+            }
+        }
+    }
+    .footer {
+    background-color: blue;
+    }
+}
 
 .felt{
 
@@ -272,25 +336,7 @@
             }
             .game_buttons{
                 background-color: @black;
-                position: absolute;
-                margin: 0;
-                margin-top: 0%;
-                padding-top: 2%;
-                right: 0%;
-                top: 0%;
-                bottom: 0%;
-                height: 100%;
-                width: 15%;
 
-                div{
-                    height: 25%;
-                    width: 100%;
-                }
-                a{
-                    height: 100%;
-                    width: 100%;
-                    padding: 8%;
-                }
                 a:hover{
                     background-color: @gray;
                 }
