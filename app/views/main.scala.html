@@ -7,6 +7,13 @@
 @(title: String, style: String)(content: Html)
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,45 +21,39 @@
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
-        <!--
-            TODO: 
-            * change Tab image from favicon to something more fitting for the game
-            * add table for changeing css styles:
-                    - include Darkmode
-                    - include Feltmode (green, felt like background, immitating the actual game board)
-                    - include something from CSS Zen Garden? (we would have to adapt the class names in order to do that)
-
-
-        -->
-
     </head>
     <body class="@style" >
         <div class="row">
             <div class="header"></div>
-            <ul class="menu navbar-nav col-sm-12 col-md-3">
-                <li class="nav-item"><a href="http://localhost:9000"> Start</a></li>
-                <li class="nav-item"><a href="http://localhost:9000/explain"> Erklärung </a></li>
-                <li class="nav-item"><a href="http://localhost:9000/game/new"> Neues Spiel starten </a></li>
-                <li class="nav-item"><a href="http://localhost:9000/game"> Zum laufenden Spiel </a></li>
-                <li class="nav-item">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"> <a href="http://localhost:9000/style/patchy"> patchy </a> </li>
-                        <li class="nav-item"> <a href="http://localhost:9000/style/felt"> felt </a> </li>
-                        <li class="nav-item"> <a href="http://localhost:9000/style/classic"> classic </a> </li>
-                    </ul>
-                </li>
-            </ul>
+            <div class="menu col-sm-12 col-md-3">
+                <div class="row">
+                    <div class="col-xs-12 col-sm col-md-12"><a type="button" class="btn btn-primary" href="http://localhost:9000">Start</a></div>
+                    <div class="col-xs-12 col-sm col-md-12"><a type="button" class="btn btn-primary" href="http://localhost:9000/explain"> Erklärung </a></div>
+                    <div class="col-xs-12 col-sm col-md-12"><a type="button" class="btn btn-primary" href="http://localhost:9000/game"> Zum laufenden Spiel </a></div>
+                    <div class="dropdown col-xs-12 col-sm col-md-12">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Styles
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="http://localhost:9000/style/patchy"> patchy </a>
+                            <a class="dropdown-item" href="http://localhost:9000/style/felt"> felt </a>
+                            <a class="dropdown-item" href="http://localhost:9000/style/classic"> classic </a>
+                            <a class="dropdown-item" href="http://localhost:9000/style/bootstrap"> bootstrap </a>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
             <div class="content col-sm-12 col-md-9">
                 @content
             </div>
         </div>
         <div class="row">
-            <div class="footer col">
-                <a href="http://localhost:9000"> Start</a>
-                <a href="http://localhost:9000/explain"> Erklärung </a>
-                <a href="http://localhost:9000/game"> Zum laufenden Spiel </a>
-                <a href="http://localhost:9000/game/new"> Neues Spiel starten </a>
+            <div class="footer col-4">
+                <a href="https://de.wikipedia.org/wiki/Shut_the_Box"> ShutTheBox Wiki </a>
+            </div>
+            <div class="footer col-8">
+                <p> Authors: Sahrah Tiefert, Jannis Liebscher </p>
             </div>
         </div>
         
