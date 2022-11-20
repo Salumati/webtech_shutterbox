@@ -12,6 +12,7 @@ GET     /                               controllers.HomeController.start()
 
 GET     /explain                        controllers.HomeController.explain()
 
+GET     /gameMock                   controllers.HomeController.startMockGame()
 GET     /game                       controllers.HomeController.startGame()
 GET     /game/new                   controllers.HomeController.newGame()
 GET     /game/:input                controllers.HomeController.doAMove(input)

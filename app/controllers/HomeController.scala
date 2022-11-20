@@ -50,6 +50,12 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     update()
     Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
+  def startMockGame() = Action{ implicit request: Request[AnyContent] =>
+    cont = Controller.apply("mock")
+    tui = new Tui(cont)
+    update()
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
+  }
   def doAMove(input:String) = Action{ implicit request: Request[AnyContent] =>
     tui.getInputAndPrintLoop(input)
     update()
