@@ -1,82 +1,40 @@
-@(player: String, dice: String, sum: Int, board: List[Boolean])
-@main("Game"){
-<div style="text-align: center">
-  <p>@player</p>
-  <p>
-    @for(index <- 0 until board.size){
-      @if(board(index)){
-        #
-      }
-      @if(!board(index)){
-        @{index + 1}
-      }
-    }
-  </p>
-  <p>
-    @for(index <- 0 until board.size){
-      @if(board(index)){
-        @{index + 1}
-      }
-      @if(!board(index)){
-        #
-      }
-    }
-  </p>
-  <p>Gewürfelt: @dice | Summe: @sum</p>
-  <center>
-  <p>
-    <table>
-      <tr>
-        <td>
-          <a href="http://localhost:9000/game/1"> 1 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/2"> 2 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/3"> 3 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/4"> 4 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/5"> 5 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/6"> 6 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/7"> 7 </a> 
-        </td>
-        <td>
-          <a href="http://localhost:9000/game/8"> 8 </a> 
-        </td> 
-        <td>
-          <a href="http://localhost:9000/game/9"> 9 </a> 
-        </td>       
-      </tr>
-    </table>
+@(style: String, player: String, dice: String, sum: Int, board: List[Boolean], moves: Int)
+@main("Game", s"$style"){
+<body onload="loadGame(@moves, @sum)">
+<div class="game row" style="text-align: center ">
 
-  </p>
-</center>
-
-  <p>
-     <a href="http://localhost:9000/game/w">Würfeln </a> 
-  </p>
-  <p>
-    <a href="http://localhost:9000/game/y">Undo</a>
-  </p>
-  <p>
-    <a href="http://localhost:9000/game/z">Redo</a>
-  </p>
-  <p>
-    <a href="http://localhost:9000/game/next">next Player</a>
-  </p>
-  <p>
-    <form></form>
-  </p>
-  <img src="@routes.Assets.versioned("images/shutthebox.png")">
+  <div class="game_display col-12">
   
-  </p>
+    <div class="player row">
+      <div class="player1" id="p1"></div>
+      <div class="player2" id="p2"></div>
+      <div class="currentPlayer" id="curP"></div>
+      @player</div>
+    <div class="clap row">
+      @for(index <- 0 until board.size){
+        @if(board(index)){
+          <a href="/game/@{index + 1}" class="stone-shut col-4 col-sm"> # </a>
+        }
+        @if(!board(index)){
+          <a href="/game/@{index + 1}" onclick="closeClap(@index + 1, @sum)" class="stone-not-shut col-4 col-sm"> @{index + 1} </a>
+        }
+      }
+    </div>
+    <div class="dice row" id="dice-output">Gewürfelt: @dice | Summe: @sum</div>
+  </div>
+
+  <div class="game_buttons col-12">
+    <div class="row">
+      <div class="decoration d-xs-none col-sm-1"></div>
+      <a class="button_dice col-12 col-sm-2" id="dice" onclick="throwDice(@sum)" href="/game/w">throw the dice </a>
+      <a class="button_undo col-12 col-sm-2" id="undo" href="/game/y">Undo </a>
+      <a class="button_redo col-12 col-sm-2" id="redo" href="/game/z">Redo </a>
+      <a class="button_nextPlayer col-12 col-sm-2" href="/game/next">next Player</a>
+      <a class="button_newGame col-12 col-sm-2" href="/game/new"> Neues Spiel starten </a>
+      <div class="decoration d-xs-none col-sm-1"></div>
+    </div>
+  </div>
 </div>
+</body>
+
 }

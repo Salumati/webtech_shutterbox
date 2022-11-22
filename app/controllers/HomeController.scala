@@ -25,28 +25,48 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    */
 
   var cont = Controller.apply()
-  val tui = new Tui(cont)
+  var tui = new Tui(cont)
   var isShut: List[Boolean] = List(false, false, false, false, false, false, false, false, false)
+  var numOfMoves: Int = 0;
+  
+  var style = "classic"
+
   def update() = {
     for ( x <- 1 to 9){
       isShut = isShut.updated(x - 1, cont.isShut(x))
     }
   }
+  
 
-  def index() = Action{ implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+  def start() = Action{ implicit request: Request[AnyContent] =>
+    Ok(views.html.start(style=style))
   }
   def explain() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.explain())
+    Ok(views.html.explain(style=style))
+  }
+  def newGame() = Action{ implicit request: Request[AnyContent] =>
+    cont = Controller.apply()
+    tui = new Tui(cont)
+    numOfMoves = 0;
+    update()
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut, moves = numOfMoves))
   }
   def startGame() = Action{ implicit request: Request[AnyContent] =>
+    numOfMoves = 0;
     update()
-    Ok(views.html.game(player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut, moves = numOfMoves))
   }
   def doAMove(input:String) = Action{ implicit request: Request[AnyContent] =>
     tui.getInputAndPrintLoop(input)
+    numOfMoves += 1;
     update()
-    Ok(views.html.game(player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut, moves = numOfMoves))
   }
+
+  def changeStyle(s:String) = Action{ implicit request: Request[AnyContent] =>
+    style = s
+    Ok(views.html.start(style=style))
+  }
+
 
 }
