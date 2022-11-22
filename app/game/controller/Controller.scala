@@ -21,6 +21,8 @@ case class Controller(
   def save: Unit = file.save(game)
   def load: GameInterface = file.load
 
+  def getRaw: String = file.getRaw(game)
+
   def doAndPublish(doThis: => GameInterface) = {
     game = doThis
     notifyObservers

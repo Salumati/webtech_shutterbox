@@ -74,5 +74,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok(views.html.start(style=style))
   }
 
-
+  def rawGameData() = Action{ implicit request: Request[AnyContent] =>
+    Ok(cont.getRaw)
+  }
 }
