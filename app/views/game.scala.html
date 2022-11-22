@@ -1,6 +1,7 @@
-@(style: String, player: String, dice: String, sum: Int, board: List[Boolean])
+@(style: String, player: String, dice: String, sum: Int, board: List[Boolean], moves: Int)
 @main("Game", s"$style"){
-<div class="game row" style="text-align: center">
+<body onload="loadGame(@moves, @sum)">
+<div class="game row" style="text-align: center ">
 
   <div class="game_display col-12">
   
@@ -11,17 +12,17 @@
           <a href="/game/@{index + 1}" class="stone-shut col-4 col-sm"> # </a>
         }
         @if(!board(index)){
-          <a href="/game/@{index + 1}" class="stone-not-shut col-4 col-sm"> @{index + 1} </a>
+          <a href="/game/@{index + 1}" onclick="closeClap(@index + 1, @sum)" class="stone-not-shut col-4 col-sm"> @{index + 1} </a>
         }
       }
     </div>
-    <div class="dice row">Gewürfelt: @dice | Summe: @sum</div>
+    <div class="dice row" id="dice-output">Gewürfelt: @dice | Summe: @sum</div>
   </div>
 
   <div class="game_buttons col-12">
     <div class="row">
       <div class="decoration d-xs-none col-sm-1"></div>
-      <a class="button_dice col-12 col-sm-2" href="/game/w">Würfeln </a>
+      <a class="button_dice col-12 col-sm-2" onclick="throwDice(@sum)" href="/game/w">throw the dice </a>
       <a class="button_undo col-12 col-sm-2" href="/game/y">Undo </a>
       <a class="button_redo col-12 col-sm-2" href="/game/z">Redo </a>
       <a class="button_nextPlayer col-12 col-sm-2" href="/game/next">next Player</a>
@@ -30,4 +31,6 @@
     </div>
   </div>
 </div>
+</body>
+
 }
