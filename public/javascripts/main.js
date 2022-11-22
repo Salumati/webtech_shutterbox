@@ -51,9 +51,6 @@ function throwDice(sum){
   }
 }
 
-// on start: don't show dice yet
-// hide illegal functions
-// show error, if move is illegal
 
 
 
