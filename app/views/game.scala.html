@@ -9,10 +9,10 @@
     <div class="clap row">
       @for(index <- 0 until board.size){
         @if(board(index)){
-          <a href="/game/@{index + 1}" class="stone-shut col-4 col-sm"> # </a>
+          <a href="/game/@{index + 1}" class="shut-@{index + 1} stone-shut col-4 col-sm"> # </a>
         }
         @if(!board(index)){
-          <a href="/game/@{index + 1}" onclick="closeClap(@index + 1, @sum)" class="stone-not-shut col-4 col-sm"> @{index + 1} </a>
+          <a href="/game/@{index + 1}" onclick="closeClap(@index + 1, @sum)" class="not-shut-@{index + 1} stone-not-shut col-4 col-sm"> @{index + 1} </a>
         }
       }
     </div>
