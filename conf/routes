@@ -18,5 +18,5 @@ GET     /game/new                   controllers.HomeController.newGame()
 GET     /game/:input                controllers.HomeController.doAMove(input)
 
 GET     /style/:input               controllers.HomeController.changeStyle(input)
-GET     /api/raw                    controllers.HomeController.rawGameData()
+GET     /api/raw/:input              controllers.HomeController.rawGameData(input)
 

@@ -38,13 +38,85 @@ function hideButton(buttonID){
 }
 
 function closeClap(index, sum){
+    return $.ajax({
+        method: "GET",
+        url: "/api/raw/" + index,
+        dataType: "json",
+        success: function (response) {
+            data = response;
+            console.log(data)
+            i = index - 1
+            var isShut = data.game.board[i]
+            console.log("Index: " + index)
+            console.log("Ist geschlossen: " + isShut)
+            var sum = data.game.sum
+            var wurf = data.game.wurf
+            document.getElementById("dice-output").innerHTML = "Gewürfelt: " + wurf + " | Summe: " + sum
+            if(isShut) {
+                console.log("Versuche klappe zu schließen")
+                document.getElementsByClassName("not-shut-" + index)[0].innerHTML = "#"
+                document.getElementsByClassName("not-shut-" + index)[0].classList.add("stone-shut");
+                document.getElementsByClassName("not-shut-" + index)[0].classList.remove("stone-not-shut");
+            } else {
+                console.log("Klappe ist zu, mache nichts")
+                }
+        }
+    });
     if(index > sum){
       window.alert("Warning; illegal move!\n the value of the closing tab cannot be larger than the dice sum!");
     }
 }
+function nextPlayer() {
+    return $.ajax({
+            method: "GET",
+            url: "/api/raw/next",
+            dataType: "json",
+            success: function (response) {
+                data = response;
+                console.log(data)
+                var sum = data.game.sum
+                var wurf = data.game.wurf
+                console.log("Würfel")
+                document.getElementById("dice-output").innerHTML = "Gewürfelt: " + wurf + " | Summe: " + sum
+                console.log("Player")
+                document.getElementsByClassName("player")[0].innerHTML = "Player 1: " + data.game.players.score1
+                                            + " | Player 2: " + data.game.players.score2
+                                            + "| Player " + data.game.players.turn + "`s turn"
+                for (let index = 1; index < 10; index++) {
+                console.log("Klap: " + index)
+                    i = index - 1
+                    var isShut = data.game.board[i]
+                    console.log("Index: " + index)
+                    console.log("Ist geschlossen: " + isShut)
+                    if(isShut) {
+                        console.log("Versuche klappe zu schließen")
+                        document.getElementsByClassName("not-shut-" + index)[0].innerHTML = "#"
+                        document.getElementsByClassName("not-shut-" + index)[0].classList.add("stone-shut");
+                        document.getElementsByClassName("not-shut-" + index)[0].classList.remove("stone-not-shut");
+                    } else {
+                        console.log("Versuche klappe zu öffnen")
+                        document.getElementsByClassName("not-shut-" + index)[0].innerHTML = index
+                        document.getElementsByClassName("not-shut-" + index)[0].classList.add("stone-not-shut");
+                        document.getElementsByClassName("not-shut-" + index)[0].classList.remove("stone-shut");
+                    }
+                }
+            }
+        });
+}
 
-
-function throwDice(sum){
+function throwDice(sum) {
+    return $.ajax({
+            method: "GET",
+            url: "/api/raw/w",
+            dataType: "json",
+            success: function (response) {
+                data = response;
+                console.log(data)
+                var sum = data.game.sum
+                var wurf = data.game.wurf
+                document.getElementById("dice-output").innerHTML = "Gewürfelt: " + wurf + " | Summe: " + sum
+            }
+        });
   if(sum > 0)
   {
     window.alert("please close claps first. you still have moves left");
