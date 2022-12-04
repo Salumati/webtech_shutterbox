@@ -26,3 +26,4 @@ project/metals.sbt
 .metals/
 .vscode/
 target/
+/vrt/backstop_data/bitmaps_test/

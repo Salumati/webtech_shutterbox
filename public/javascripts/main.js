@@ -43,23 +43,7 @@ function closeClap(index, sum){
         url: "/api/raw/" + index,
         dataType: "json",
         success: function (response) {
-            data = response;
-            console.log(data)
-            i = index - 1
-            var isShut = data.game.board[i]
-            console.log("Index: " + index)
-            console.log("Ist geschlossen: " + isShut)
-            var sum = data.game.sum
-            var wurf = data.game.wurf
-            document.getElementById("dice-output").innerHTML = "Gewürfelt: " + wurf + " | Summe: " + sum
-            if(isShut) {
-                console.log("Versuche klappe zu schließen")
-                document.getElementsByClassName("not-shut-" + index)[0].innerHTML = "#"
-                document.getElementsByClassName("not-shut-" + index)[0].classList.add("stone-shut");
-                document.getElementsByClassName("not-shut-" + index)[0].classList.remove("stone-not-shut");
-            } else {
-                console.log("Klappe ist zu, mache nichts")
-                }
+            insertJSON(response)
         }
     });
     if(index > sum){
@@ -72,56 +56,92 @@ function nextPlayer() {
             url: "/api/raw/next",
             dataType: "json",
             success: function (response) {
-                data = response;
-                console.log(data)
-                var sum = data.game.sum
-                var wurf = data.game.wurf
-                console.log("Würfel")
-                document.getElementById("dice-output").innerHTML = "Gewürfelt: " + wurf + " | Summe: " + sum
-                console.log("Player")
-                document.getElementsByClassName("player")[0].innerHTML = "Player 1: " + data.game.players.score1
-                                            + " | Player 2: " + data.game.players.score2
-                                            + "| Player " + data.game.players.turn + "`s turn"
-                for (let index = 1; index < 10; index++) {
-                console.log("Klap: " + index)
-                    i = index - 1
-                    var isShut = data.game.board[i]
-                    console.log("Index: " + index)
-                    console.log("Ist geschlossen: " + isShut)
-                    if(isShut) {
-                        console.log("Versuche klappe zu schließen")
-                        document.getElementsByClassName("not-shut-" + index)[0].innerHTML = "#"
-                        document.getElementsByClassName("not-shut-" + index)[0].classList.add("stone-shut");
-                        document.getElementsByClassName("not-shut-" + index)[0].classList.remove("stone-not-shut");
-                    } else {
-                        console.log("Versuche klappe zu öffnen")
-                        document.getElementsByClassName("not-shut-" + index)[0].innerHTML = index
-                        document.getElementsByClassName("not-shut-" + index)[0].classList.add("stone-not-shut");
-                        document.getElementsByClassName("not-shut-" + index)[0].classList.remove("stone-shut");
-                    }
-                }
+                insertJSON(response)
             }
         });
 }
 
 function throwDice(sum) {
-    return $.ajax({
-            method: "GET",
-            url: "/api/raw/w",
-            dataType: "json",
-            success: function (response) {
-                data = response;
-                console.log(data)
-                var sum = data.game.sum
-                var wurf = data.game.wurf
-                document.getElementById("dice-output").innerHTML = "Gewürfelt: " + wurf + " | Summe: " + sum
-            }
-        });
-  if(sum > 0)
-  {
-    window.alert("please close claps first. you still have moves left");
-  }
+    $.ajax({
+        method: "GET",
+        url: "/api/raw/w",
+        dataType: "json",
+        success: function (response) {
+            insertJSON(response)
+        }
+    });
+    if(sum > 0)
+    {
+        window.alert("please close claps first. you still have moves left");
+    }
 }
+/**
+ * Aktualisiert Elemente des SPielfeldes
+ * @param {JSON} data - Die SPieldaten als JSON Object
+ */
+function insertJSON(data) {
+    console.log(data)
+    // update Dice
+    var sum = data.game.sum
+    var wurf = data.game.wurf
+    document.getElementById("dice-output").innerHTML = "Gewürfelt: " + wurf + " | Summe: " + sum
+    // update Player
+    document.getElementsByClassName("player")[0].innerHTML = "Player 1: " + data.game.players.score1
+                                + " | Player 2: " + data.game.players.score2
+                                + "| Player " + data.game.players.turn + "`s turn"
+    // update Board
+    for (let index = 1; index < 10; index++) {
+        i = index - 1
+        var isShut = data.game.board[i]
+        if(isShut) {
+            document.getElementsByClassName("not-shut-" + index)[0].innerHTML = "#"
+            document.getElementsByClassName("not-shut-" + index)[0].classList.add("stone-shut");
+            document.getElementsByClassName("not-shut-" + index)[0].classList.remove("stone-not-shut");
+        } else {
+            document.getElementsByClassName("not-shut-" + index)[0].innerHTML = index
+            document.getElementsByClassName("not-shut-" + index)[0].classList.add("stone-not-shut");
+            document.getElementsByClassName("not-shut-" + index)[0].classList.remove("stone-shut");
+        }
+    }
+}
+/**
+ * Erstellt aus der HTTP Connection eine Websocket Connection
+ */
+function connectWebSocket() {
+    console.log("Connecting to Websocket");
+    var websocket = new WebSocket("ws://localhost:9000/websocket");
+    console.log("Connected to Websocket");
+
+    websocket.onopen = function(event) {
+        console.log("Trying to connect to Server");
+        websocket.send("Trying to connect to Server");
+    }
+
+    websocket.onclose = function () {
+        console.log('Connection Closed!');
+    };
+
+    websocket.onerror = function (error) {
+        console.log('Error Occured: ' + error);
+    };
+
+    websocket.onmessage = function (e) {
+        if (typeof e.data === "string") {
+            console.log('String message received: ' + e.data);
+            insertJSON(JSON.parse(e.data))
+        }
+        else if (e.data instanceof ArrayBuffer) {
+            console.log('ArrayBuffer received: ' + e.data);
+        }
+        else if (e.data instanceof Blob) {
+            console.log('Blob received: ' + e.data);
+        }
+    };
+}
+$( document ).ready(function() {
+    console.log("Document is ready");
+    connectWebSocket()
+});
 
 // on start: don't show dice yet
 // hide illegal functions
