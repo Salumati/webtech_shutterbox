@@ -4,17 +4,25 @@ const redoID = "redo";
 const diceID = "dice";
 const toGameID = "toGame";
 const changeStylesID = "styles";
+var sum = 0;
+var numberOfMoves = 0;
 
-
-function loadGame(numberOfMoves, sum){
-  if(numberOfMoves===0){
+function loadGame(){
+    if(numberOfMoves===0){
     startGame();
-  }else if(sum === 0){
-    document.getElementById(diceOutputID).innerHTML = "No more moves, pleas throw the dice again."
-    highlightButton(diceID)
-  }
-  hideButton(toGameID);
-  hideButton(changeStylesID);
+    }else if(sum === 0){
+        document.getElementById(diceOutputID).innerHTML = "No more moves, pleas throw the dice again."
+        highlightButton(diceID)
+    }
+    
+    if(numberOfMoves===1) {
+        unhideButton(undoID);
+        unhideButton(redoID);
+    }
+    
+    
+    hideButton(toGameID);
+    hideButton(changeStylesID);
 }
 
 function startGame(){
@@ -34,10 +42,14 @@ function highlightButton(buttonID){
 }
 function hideButton(buttonID){
   document.getElementById(buttonID).style.display = "none";
+}
+
+function unhideButton(buttonID){
+    document.getElementById(buttonID).style.display = "block";
 
 }
 
-function closeClap(index, sum){
+function closeClap(index){
     return $.ajax({
         method: "GET",
         url: "/api/raw/" + index,
@@ -61,7 +73,7 @@ function nextPlayer() {
         });
 }
 
-function throwDice(sum) {
+function throwDice() {
     $.ajax({
         method: "GET",
         url: "/api/raw/w",
@@ -74,6 +86,7 @@ function throwDice(sum) {
     {
         window.alert("please close claps first. you still have moves left");
     }
+    numberOfMoves +=1;
 }
 /**
  * Aktualisiert Elemente des SPielfeldes
@@ -82,8 +95,8 @@ function throwDice(sum) {
 function insertJSON(data) {
     console.log(data)
     // update Dice
-    var sum = data.game.sum
-    var wurf = data.game.wurf
+    sum = data.game.sum
+    let wurf = data.game.wurf
     document.getElementById("dice-output").innerHTML = "Gewürfelt: " + wurf + " | Summe: " + sum
     // update Player
     document.getElementsByClassName("player")[0].innerHTML = "Player 1: " + data.game.players.score1
@@ -103,6 +116,7 @@ function insertJSON(data) {
             document.getElementsByClassName("not-shut-" + index)[0].classList.remove("stone-shut");
         }
     }
+    loadGame();
 }
 /**
  * Erstellt aus der HTTP Connection eine Websocket Connection
