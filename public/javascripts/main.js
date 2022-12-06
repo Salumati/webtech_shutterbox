@@ -49,6 +49,42 @@ function unhideButton(buttonID){
 
 }
 
+function undo(){
+    numberOfMoves -= 1;
+    return $.ajax({
+        method: "GET",
+        url: "/api/raw/y",
+        dataType: "json",
+        success: function (response) {
+            insertJSON(response)
+        }
+    });
+}
+
+function redo(){
+    return $.ajax({
+        method: "GET",
+        url: "/api/raw/z",
+        dataType: "json",
+        success: function (response) {
+            insertJSON(response)
+        }
+    });
+}
+
+function newGame(){
+    numberOfMoves = 0;
+    return $.ajax({
+        method: "GET",
+        url: "/api/raw/new",
+        dataType: "json",
+        success: function (response) {
+            insertJSON(response)
+        }
+    });
+}
+
+
 function closeClap(index){
     return $.ajax({
         method: "GET",
