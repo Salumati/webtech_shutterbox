@@ -174,6 +174,7 @@ function connectWebSocket() {
 
     websocket.onclose = function () {
         console.log('Connection Closed!');
+        connectWebSocket()
     };
 
     websocket.onerror = function (error) {
