@@ -63,7 +63,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)
     tui = new Tui(cont)
     numOfMoves = 0;
     update()
-    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut, moves = numOfMoves))
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
   /**
    * Liefert die HTML-Spielseite
@@ -71,7 +71,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)
   def startGame() = Action{ implicit request: Request[AnyContent] =>
     numOfMoves = 0;
     update()
-    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut, moves = numOfMoves))
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
   /**
    * Startet ein neues (Mock)Spiel und liefert die HTML-Spielseite
@@ -81,7 +81,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)
     cont = Controller.apply("mock")
     tui = new Tui(cont)
     update()
-    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut, moves = numOfMoves))
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
   /**
    * Führt eine Aktion aus und liefert die HTML-Spielseite
@@ -91,7 +91,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)
     tui.getInputAndPrintLoop(input)
     numOfMoves += 1;
     update()
-    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut, moves = numOfMoves))
+    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
   }
   /**
    * Ändert den Stil und liefert die HTML-Startseite
