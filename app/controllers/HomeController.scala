@@ -55,16 +55,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)
   def explain() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.explain(style=style))
   }
-  /**
-   * Startet ein neues Spiel und liefert die HTML-Spielseite
-   */
-  def newGame() = Action{ implicit request: Request[AnyContent] =>
-    cont = Controller.apply()
-    tui = new Tui(cont)
-    numOfMoves = 0;
-    update()
-    Ok(views.html.game(style=style, player = cont.getPlayers, dice = cont.getDice, sum = cont.getSum, board = isShut))
-  }
+
   /**
    * Liefert die HTML-Spielseite
    */
@@ -106,10 +97,22 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)
    * @param input Die auszuführende Aktion
    */
   def rawGameData(input: String) = Action{ implicit request: Request[AnyContent] =>
-    tui.getInputAndPrintLoop(input)
-    numOfMoves += 1;
+    if(input=="new"){
+      newGame()
+    }else{
+      tui.getInputAndPrintLoop(input)
+      numOfMoves += 1;
+    }
     update()
     Ok(cont.getRaw)
+  }
+    /**
+   * Startet ein neues Spiel und liefert die HTML-Spielseite
+   */
+  def newGame() = {
+    cont = Controller.apply()
+    tui = new Tui(cont)
+    numOfMoves = 0;
   }
 
   /**

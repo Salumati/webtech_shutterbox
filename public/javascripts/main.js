@@ -12,15 +12,14 @@ function loadGame(){
     startGame();
     }else if(sum === 0){
         document.getElementById(diceOutputID).innerHTML = "No more moves, pleas throw the dice again."
-        highlightButton(diceID)
+        highlightButton(diceID);
+    }else{
+        unhighlightButton(diceID);
     }
-    
     if(numberOfMoves===1) {
         unhideButton(undoID);
         unhideButton(redoID);
     }
-    
-    
     hideButton(toGameID);
     hideButton(changeStylesID);
 }
@@ -38,12 +37,13 @@ function sayHello(){
 
 function highlightButton(buttonID){
   document.getElementById(buttonID).style.color = "red";
-
+}
+function unhighlightButton(buttonID){
+    document.getElementById(buttonID).style.color = "black";
 }
 function hideButton(buttonID){
   document.getElementById(buttonID).style.display = "none";
 }
-
 function unhideButton(buttonID){
     document.getElementById(buttonID).style.display = "block";
 
@@ -62,6 +62,7 @@ function undo(){
 }
 
 function redo(){
+    numberOfMoves += 1;
     return $.ajax({
         method: "GET",
         url: "/api/raw/z",
@@ -73,6 +74,7 @@ function redo(){
 }
 
 function newGame(){
+    // missing functionality: needs to reset und reload the claps!
     numberOfMoves = 0;
     return $.ajax({
         method: "GET",
@@ -86,6 +88,10 @@ function newGame(){
 
 
 function closeClap(index){
+    if(index > sum){
+        window.alert("Warning; illegal move!\n the value of the closing tab cannot be larger than the dice sum!");
+      }
+    numberOfMoves +=1;
     return $.ajax({
         method: "GET",
         url: "/api/raw/" + index,
@@ -94,11 +100,10 @@ function closeClap(index){
             insertJSON(response)
         }
     });
-    if(index > sum){
-      window.alert("Warning; illegal move!\n the value of the closing tab cannot be larger than the dice sum!");
-    }
+    
 }
 function nextPlayer() {
+    numberOfMoves +=1;
     return $.ajax({
             method: "GET",
             url: "/api/raw/next",
@@ -110,6 +115,11 @@ function nextPlayer() {
 }
 
 function throwDice() {
+    if(sum > 0)
+    {
+        window.alert("please close claps first. you still have moves left");
+    }
+    numberOfMoves +=1;
     $.ajax({
         method: "GET",
         url: "/api/raw/w",
@@ -118,11 +128,6 @@ function throwDice() {
             insertJSON(response)
         }
     });
-    if(sum > 0)
-    {
-        window.alert("please close claps first. you still have moves left");
-    }
-    numberOfMoves +=1;
 }
 /**
  * Aktualisiert Elemente des SPielfeldes

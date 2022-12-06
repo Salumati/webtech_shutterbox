@@ -46,8 +46,6 @@ case class Controller(
   def endMove: GameInterface = undoManager.doStep(game, new EndMoveCommand())
   def undo: GameInterface = undoManager.undoStep(game)
   def redo: GameInterface = undoManager.redoStep(game)
-    
-
 }
 
 object Controller {
