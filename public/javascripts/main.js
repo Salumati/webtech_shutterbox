@@ -7,6 +7,7 @@ const changeStylesID = "styles";
 var sum = 0;
 var numberOfMoves = 0;
 
+// functions for manipulating board:
 function loadGame(){
     if(numberOfMoves===0){
     startGame();
@@ -23,7 +24,6 @@ function loadGame(){
     hideButton(toGameID);
     hideButton(changeStylesID);
 }
-
 function startGame(){
     sayHello();
     hideButton(undoID);
@@ -34,7 +34,6 @@ function sayHello(){
   document.getElementById(diceOutputID).innerHTML = ("Welcome! To start, please throw the dice.") ;
   // highlight the dice button in the first move!
 }
-
 function highlightButton(buttonID){
   document.getElementById(buttonID).style.color = "red";
 }
@@ -48,7 +47,6 @@ function unhideButton(buttonID){
     document.getElementById(buttonID).style.display = "block";
 
 }
-
 function undo(){
     numberOfMoves -= 1;
     return $.ajax({
@@ -60,7 +58,6 @@ function undo(){
         }
     });
 }
-
 function redo(){
     numberOfMoves += 1;
     return $.ajax({
@@ -72,7 +69,6 @@ function redo(){
         }
     });
 }
-
 function newGame(){
     // missing functionality: needs to reset und reload the claps!
     numberOfMoves = 0;
@@ -85,8 +81,6 @@ function newGame(){
         }
     });
 }
-
-
 function closeClap(index){
     if(index > sum){
         window.alert("Warning; illegal move!\n the value of the closing tab cannot be larger than the dice sum!");
@@ -113,7 +107,6 @@ function nextPlayer() {
             }
         });
 }
-
 function throwDice() {
     if(sum > 0)
     {
@@ -129,6 +122,9 @@ function throwDice() {
         }
     });
 }
+
+
+
 /**
  * Aktualisiert Elemente des SPielfeldes
  * @param {JSON} data - Die SPieldaten als JSON Object
