@@ -83,7 +83,7 @@ const app = Vue.createApp({
         
             this.websocket.onmessage = function (e) {
                 if (typeof e.data === "string") {
-                    console.log('String message received: ' + e.data);
+                    console.log('String message received: ' + e.data)
                 }
                 else if (e.data instanceof ArrayBuffer) {
                     console.log('ArrayBuffer received: ' + e.data);
