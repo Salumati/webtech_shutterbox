@@ -27,3 +27,5 @@ project/metals.sbt
 .vscode/
 target/
 /vrt/backstop_data/bitmaps_test/
+
+wt_shutthebox/

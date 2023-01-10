@@ -7,42 +7,6 @@ const changeStylesID = "styles";
 let id = 1;
 
 
-/*
-function connectWebSocket() {
-    console.log("Connecting to Websocket");
-    var websocket = new WebSocket("ws://localhost:9000/websocket");
-    console.log("Connected to Websocket");
-
-    websocket.onopen = function(event) {
-        console.log("Trying to connect to Server");
-        websocket.send("Trying to connect to Server");
-    }
-
-    websocket.onclose = function () {
-        console.log('Connection Closed!');
-        connectWebSocket()
-    };
-
-    websocket.onerror = function (error) {
-        console.log('Error Occured: ' + error);
-    };
-
-    websocket.onmessage = function (e) {
-        if (typeof e.data === "string") {
-            console.log('String message received: ' + e.data);
-            insertJSON(JSON.parse(e.data))
-        }
-        else if (e.data instanceof ArrayBuffer) {
-            console.log('ArrayBuffer received: ' + e.data);
-        }
-        else if (e.data instanceof Blob) {
-            console.log('Blob received: ' + e.data);
-        }
-    };
-}
-*/
-
-
 // @param {JSON} data 
 const app = Vue.createApp({
     data(){
@@ -159,7 +123,7 @@ const app = Vue.createApp({
         }
     },
     created(){
-        this.connectWebSocket();
+        this  .connectWebSocket();
         console.log("created vue");
     },
     update(){
