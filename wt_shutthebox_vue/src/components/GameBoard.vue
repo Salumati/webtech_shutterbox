@@ -47,8 +47,8 @@ export default{
             <WoodDisplay txt="Gewürfelt: not thrown yet | Summe: 0"/>
         </div>
         <div class="gameButtons">
-            <WoodButton txt="throwDice"/>
-            <WoodButton txt="undo"/>
+            <WoodButtons txt="throwDice"/>
+            <WoodButtons txt="undo"/>
             <WoodButtons txt="redo"/>
             <WoodButtons txt="next Player"/>
             <WoodButtons txt="new Game"/>
