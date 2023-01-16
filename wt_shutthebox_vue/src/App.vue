@@ -1,17 +1,22 @@
 <template>
   <h1> Hello World!</h1>
-  <h2> <Player/> </h2>
+  <GameBoard></GameBoard>
+  <WoodButton txt="first Button" link="asdf"></WoodButton>
+  <WoodButton txt="second Button" link="not a link"></WoodButton>
+
  
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import Player from './components/PlayerShowcase.vue'
+import WoodButton from './components/WoodButtons.vue'
+import GameBoard from './components/GameBoard.vue'
 
 export default {
   name: 'App',
   components: {
-    Player,
+    GameBoard,
+    WoodButton
   }
 }
 </script>
