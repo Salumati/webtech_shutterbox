@@ -1,5 +1,6 @@
 
 <script>
+import $ from 'jquery'
 let id = 1;
 export default {
     name: 'clapRow',
@@ -30,6 +31,21 @@ export default {
             // send data to server
             // this.sendAjaxReq(clapId)
             this.claps[clapId - 1].isClosed = true;
+            $.ajax({
+                method: "GET",
+                url: "/api/raw/"+clapId,
+                dataType: "json",
+                success: function (data) {
+                    for(let idx = 0; idx < 9; idx++){
+                        this.claps[idx].isClosed = data.game.board[idx];
+                    }
+                    this.diceSum = data.game.wurf;
+
+                }
+            }
+
+            )
+
             console.log("closed clap " + clapId)
         }
     }
@@ -41,6 +57,7 @@ export default {
         <a v-if="clap.isClosed" class="clap col-4 col-sm" > # </a>
         <a v-else v-on:click="closeClap(clap.number)" class="clap col-4 col-sm"> {{ clap.number }}</a>
     </div>
+    <div> {{ diceSum }} </div>
 </template>
 
 <style>

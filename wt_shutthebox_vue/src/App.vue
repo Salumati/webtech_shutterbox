@@ -3,7 +3,6 @@
   <GameBoard></GameBoard>
   <WoodButton txt="first Button" link="asdf"></WoodButton>
   <WoodButton txt="second Button" link="not a link"></WoodButton>
-
  
 </template>
 

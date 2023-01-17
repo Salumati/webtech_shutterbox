@@ -2,7 +2,7 @@
 import WoodDisplay from './WoodDisplay.vue';
 import WoodButtons from './WoodButtons.vue';
 import ClapRow from './ClapsRow.vue';
-let id = 1;
+import $ from 'jquery'
 
 export default{
     components:{
@@ -14,29 +14,35 @@ export default{
         return{
             dice: 0,
             diceSum: 2,
-            claps: [
-                {number: id++, isClosed: false},
-                {number: id++, isClosed: false},
-                {number: id++, isClosed: false},
-                {number: id++, isClosed: false},
-                {number: id++, isClosed: false},
-                {number: id++, isClosed: false},
-                {number: id++, isClosed: false},
-                {number: id++, isClosed: false},
-                {number: id++, isClosed: false}
-            ]
+            players: "",
+
         }
     },
     methods:{
-        closeClap(clapNumber){
-            this.claps[clapNumber - 1].isClosed = true;
-            console.log("closed clap " + clapNumber)
-        }
+        throwDice(){
+            this.sendAjaxReq("w")
+            console.log("threw dice")
+        },
+        sendAjaxReq(operation){
+            console.log("starting ajax")
+            $.ajax({
+                method: "GET",
+                url: "localhost:9000/api/raw/"+operation,
+                dataType: "json",
+                success: function (data) {
+                    this.players = "Player 1: " + data.game.players.score1
+                        + " | Player 2: " + data.game.players.score2
+                        + "| Player " + data.game.players.turn + "`s turn";
+                    this.diceSum = data.game.sum;
+                    this.dice = data.game.wurf;
+                    console.log(data);
+                }
+            })
+            
+        },
     }
-    
+
 }
-
-
 </script>
 
 <template>
@@ -45,8 +51,10 @@ export default{
         <div class="gameDisplay" >
             <ClapRow/>
             <WoodDisplay txt="Gewürfelt: not thrown yet | Summe: 0"/>
+            <div> {{diceSum}}</div>
         </div>
         <div class="gameButtons">
+            <a class="button_dice col-12 col-sm-2" :id="dice" v-on:click="throwDice()">throw the dice </a>
             <WoodButtons txt="throwDice"/>
             <WoodButtons txt="undo"/>
             <WoodButtons txt="redo"/>
@@ -66,7 +74,20 @@ export default{
     border-style: ridge;
     border-width: thick;
     border-color: black;
-    
  }
+ .button_dice{
+    display: inline-block;
+    text-align: center;
+    width: 100px;
+    border-style: ridge;
+    border-width: thick;
+    border-color: #e9d3b2;
+    background-color: #e9d3b2;
+    padding: 10px;
+    background-image:url("/src/assets/retina_wood.png");
+    background-color: white;
+    background-repeat: repeat;
+ }
+
 
 </style>
