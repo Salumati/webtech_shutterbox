@@ -2,18 +2,15 @@
     export default{
         name: "WoodButton",
         props: {
-            txt: String
+            txt: String,
+            link: String,
         },
-        methods:{
-            doTheThing(){
-                console.log("did the thing: $link")
-            }
-        }
+
     }
 </script>
 
 <template>
-    <a class="woodButton" v-on:click="doTheThing()"> {{txt}} </a>
+    <div class="woodButton col-xs-12 col-sm col-md-12"><router-link :to="this.link"> {{ txt }}</router-link></div>
 </template>
 
 <style>
@@ -33,5 +30,14 @@
 .woodButton:hover {
     opacity: 0.7;
     cursor: pointer;
+}
+.a{
+    text-decoration: none;
+    color: black;
+}
+.a:active{
+    text-decoration: none;
+    color: black;
+
 }
 </style>

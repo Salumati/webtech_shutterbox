@@ -1,32 +1,36 @@
 <template>
-  <h1> Hello World!</h1>
-  <GameBoard></GameBoard>
-  <WoodButton txt="first Button" link="asdf"></WoodButton>
-  <WoodButton txt="second Button" link="not a link"></WoodButton>
- 
+  <div class="app">
+  <MyNavbar/>
+  <RouterView/>
+  <div class="footer col-12">
+      <div class="row">
+          <div class="col-4">
+              <a href="https://de.wikipedia.org/wiki/Shut_the_Box"> ShutTheBox Wiki </a>
+          </div>
+          <div class="col-8">Authors: Sahrah Tiefert, Jannis Liebscher</div>
+      </div>
+  </div>
+</div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import WoodButton from './components/WoodButtons.vue'
-import GameBoard from './components/GameBoard.vue'
-
+import MyNavbar from './components/MyNavbar.vue';
+import { RouterView } from 'vue-router';
 export default {
   name: 'App',
   components: {
-    GameBoard,
-    WoodButton
-  }
+    MyNavbar,
+    RouterView
+}
 }
 </script>
 
 <style>
-#app {
+.app{
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-image:url("/src/assets/wood_button.png");
+  background-repeat: repeat;
 }
 </style>

@@ -57,7 +57,6 @@ export default {
         <a v-if="clap.isClosed" class="clap col-4 col-sm" > # </a>
         <a v-else v-on:click="closeClap(clap.number)" class="clap col-4 col-sm"> {{ clap.number }}</a>
     </div>
-    <div> {{ diceSum }} </div>
 </template>
 
 <style>
